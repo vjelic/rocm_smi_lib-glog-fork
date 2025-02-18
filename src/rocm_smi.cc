@@ -368,8 +368,9 @@ static rsmi_status_t get_dev_mon_value(amd::smi::MonitorTypes type,
   }
 
   if (!amd::smi::IsInteger(val_str)) {
-    std::cerr << "Expected integer value from monitor,"
-                                " but got \"" << val_str << "\"" << std::endl;
+    std::ostringstream ss;
+    ss << "Expected integer value from monitor, but got \"" << val_str << "\"";
+    LOG_ERROR(ss);
     return RSMI_STATUS_UNEXPECTED_DATA;
   }
 
@@ -397,8 +398,9 @@ static rsmi_status_t get_dev_mon_value(amd::smi::MonitorTypes type,
   }
 
   if (!amd::smi::IsInteger(val_str)) {
-    std::cerr << "Expected integer value from monitor,"
-                                " but got \"" << val_str << "\"" << std::endl;
+    std::ostringstream ss;
+    ss << "Expected integer value from monitor, but got \"" << val_str << "\"";
+    LOG_ERROR(ss);
     return RSMI_STATUS_UNEXPECTED_DATA;
   }
 
@@ -5363,7 +5365,7 @@ rsmi_status_t rsmi_dev_target_graphics_version_get(uint32_t dv_ind,
     }
     if (ret == RSMI_STATUS_SUCCESS) {
       version = amd::smi::removeString(version, "gfx");
-      *gfx_version = std::stoull(version);
+      *gfx_version = uint64_t(std::stoull(version, nullptr, 16));
     }
     ss << __PRETTY_FUNCTION__
        << " | ======= end ======= "

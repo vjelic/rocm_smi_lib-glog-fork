@@ -397,11 +397,8 @@ def getTargetGfxVersion(device, silent=False):
     target_graphics_version = c_uint64()
     gfx_ver_ret = "N/A"
     ret = rocmsmi.rsmi_dev_target_graphics_version_get(device, byref(target_graphics_version))
-    target_graphics_version = str(target_graphics_version.value)
+    target_graphics_version = hex(target_graphics_version.value)[2:]
     if rsmi_ret_ok(ret, device, 'get_target_gfx_version', silent=silent):
-        if target_graphics_version == "9010":
-            hex_part = str(hex(int(str(target_graphics_version)[2:]))).replace("0x", "")
-            target_graphics_version = str(target_graphics_version)[:2] + hex_part
         gfx_ver_ret = "gfx" + str(target_graphics_version)
     return gfx_ver_ret
 
@@ -1980,22 +1977,28 @@ def showAllConcise(deviceList):
                              + getComputePartition(device, silent)
                              + ", " + getPartitionId(device, silent))
         sclk = showCurrentClocks([device], 'sclk', concise=silent)
+        if not sclk:
+            sclk = 'N/A'
         mclk = showCurrentClocks([device], 'mclk', concise=silent)
+        if not mclk:
+            mclk = 'N/A'
         (retCode, fanLevel, fanSpeed) = getFanSpeed(device, silent)
         fan = str(fanSpeed) + '%'
         if getPerfLevel(device, silent) != -1:
             perf = getPerfLevel(device, silent)
         else:
-            perf = 'Unsupported'
+            perf = 'N/A'
         if getMaxPower(device, silent) != -1:
             pwrCap = str(getMaxPower(device, silent)) + 'W'
         else:
-            pwrCap = 'Unsupported'
+            pwrCap = 'N/A'
         if getGpuUse(device, silent) != -1:
             gpu_busy = str(getGpuUse(device, silent)) + '%'
         else:
-            gpu_busy = 'Unsupported'
+            gpu_busy = 'N/A'
         allocated_mem_percent = getAllocatedMemoryPercent(device)
+        if allocated_mem_percent['ret'] != rsmi_status_t.RSMI_STATUS_SUCCESS:
+            allocated_mem_percent['combined'] = 'N/A'
 
         # Top Row - per device data
         values['card%s' % (str(device))] = [device, getNodeId(device),
