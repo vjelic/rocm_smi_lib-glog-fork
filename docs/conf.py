@@ -22,7 +22,7 @@ with open('../CMakeLists.txt', encoding='utf-8') as f:
     if not match:
         raise ValueError("VERSION not found!")
     version_number = match[1]
-left_nav_title = f"ROCm SMI LIB {version_number} Documentation"
+left_nav_title = f"ROCm SMI LIB 7.4.0 Documentation"
 
 shutil.copy2('../CHANGELOG.md','./CHANGELOG.md')
 
