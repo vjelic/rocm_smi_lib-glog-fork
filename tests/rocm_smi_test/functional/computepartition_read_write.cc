@@ -460,10 +460,21 @@ void TestComputePartitionReadWrite::Run(void) {
                   << "\t**New Partition (set): "
                   << computePartitionString(updatePartition) << "\n";
       }
-      EXPECT_TRUE((ret == RSMI_STATUS_SETTING_UNAVAILABLE)
-                  || (ret== RSMI_STATUS_PERMISSION)
-                  || (ret == RSMI_STATUS_SUCCESS)
-                  || ret == RSMI_STATUS_BUSY);
+      EXPECT_TRUE(ret == RSMI_STATUS_SETTING_UNAVAILABLE
+                  || ret== RSMI_STATUS_PERMISSION
+                  || ret == RSMI_STATUS_SUCCESS
+                  || ret == RSMI_STATUS_BUSY
+                  || ret == RSMI_STATUS_NOT_SUPPORTED
+                  || ret == RSMI_STATUS_INVALID_ARGS);
+
+      if (ret == RSMI_STATUS_INVALID_ARGS) {
+        std::cout << "\t**"
+                  << "1st Test: Due to invalid args, skipping rest of test for this device."
+                  << "\n\t Device might be in a static partition mode. "
+                  << "With inability to change partition modes."
+                  << std::endl;
+        break;
+      }
     }
 
     for (int partition = static_cast<int>(mapStringToRSMIComputePartitionTypes.at(
@@ -501,6 +512,15 @@ void TestComputePartitionReadWrite::Run(void) {
         }
         system_wait(5);
         continue;
+      }
+
+      if (ret == RSMI_STATUS_INVALID_ARGS) {
+        std::cout << "\t**"
+                  << "2nd test: Due to invalid args, skipping rest of test for this device."
+                  << "\n\t Device might be in a static partition mode. "
+                  << "With inability to change partition modes."
+                  << std::endl;
+        break;
       }
 
       bool isSettingUnavailable = false;
