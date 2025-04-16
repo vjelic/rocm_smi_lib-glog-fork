@@ -4728,7 +4728,12 @@ rsmi_dev_gpu_metrics_info_get(uint32_t dv_ind, rsmi_gpu_metrics_t* smu) {
   dev->set_smi_device_id(dv_ind);
   uint32_t partition_id = 0;
   auto ret = rsmi_dev_partition_id_get(dv_ind, &partition_id);
-  dev->set_smi_partition_id(partition_id);
+  if (ret == RSMI_STATUS_SUCCESS) {
+    dev->set_smi_partition_id(partition_id);
+  } else {
+    dev->set_smi_partition_id(0);
+  }
+
   dev->dev_log_gpu_metrics(ostrstream);
   const auto [error_code, external_metrics] = dev->dev_copy_internal_to_external_metrics();
   if (error_code != rsmi_status_t::RSMI_STATUS_SUCCESS) {
