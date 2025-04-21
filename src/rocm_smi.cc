@@ -3943,6 +3943,7 @@ rsmi_dev_unique_id_get(uint32_t dv_ind, uint64_t *unique_id) {
       *unique_id = kfd_unique_id;
       ret = RSMI_STATUS_SUCCESS;
     } else {
+      *unique_id = std::numeric_limits<uint64_t>::max();
       ret = RSMI_STATUS_NOT_SUPPORTED;
     }
     ss << __PRETTY_FUNCTION__
