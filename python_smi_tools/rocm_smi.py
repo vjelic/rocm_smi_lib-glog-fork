@@ -320,7 +320,7 @@ def getDRMDeviceId(device, silent=False):
     dv_id = c_short()
     ret = rocmsmi.rsmi_dev_id_get(device, byref(dv_id))
     device_id_ret = "N/A"
-    if rsmi_ret_ok(ret, device, 'get_device_id', silent):
+    if rsmi_ret_ok(ret, device, 'get_device_id', silent=True):
         device_id_ret = hex(dv_id.value)
     return device_id_ret
 
@@ -335,7 +335,7 @@ def getRev(device, silent=False):
     dv_rev = c_short()
     ret = rocmsmi.rsmi_dev_revision_get(device, byref(dv_rev))
     revision_ret = "N/A"
-    if rsmi_ret_ok(ret, device, 'get_device_rev', silent=silent):
+    if rsmi_ret_ok(ret, device, 'get_device_rev', silent=True):
         revision_ret =  padHexValue(hex(dv_rev.value), 2)
     return revision_ret
 
@@ -349,7 +349,7 @@ def getSubsystemId(device, silent=False):
     model = c_short()
     ret = rocmsmi.rsmi_dev_subsystem_id_get(device, byref(model))
     device_model = "N/A"
-    if rsmi_ret_ok(ret, device, 'get_subsystem_name', silent=silent):
+    if rsmi_ret_ok(ret, device, 'get_subsystem_name', silent=True):
         device_model = model.value
         # padHexValue is used for applications that expect 4-digit card models
         device_model = padHexValue(hex(device_model), 4)
@@ -1977,22 +1977,28 @@ def showAllConcise(deviceList):
                              + getComputePartition(device, silent)
                              + ", " + getPartitionId(device, silent))
         sclk = showCurrentClocks([device], 'sclk', concise=silent)
+        if not sclk:
+            sclk = 'N/A'
         mclk = showCurrentClocks([device], 'mclk', concise=silent)
+        if not mclk:
+            mclk = 'N/A'
         (retCode, fanLevel, fanSpeed) = getFanSpeed(device, silent)
         fan = str(fanSpeed) + '%'
         if getPerfLevel(device, silent) != -1:
-            perf = getPerfLevel(device, silent)
+            perf = str(getPerfLevel(device, silent)).lower()
         else:
-            perf = 'Unsupported'
+            perf = 'N/A'
         if getMaxPower(device, silent) != -1:
             pwrCap = str(getMaxPower(device, silent)) + 'W'
         else:
-            pwrCap = 'Unsupported'
+            pwrCap = 'N/A'
         if getGpuUse(device, silent) != -1:
             gpu_busy = str(getGpuUse(device, silent)) + '%'
         else:
-            gpu_busy = 'Unsupported'
+            gpu_busy = 'N/A'
         allocated_mem_percent = getAllocatedMemoryPercent(device)
+        if allocated_mem_percent['ret'] != rsmi_status_t.RSMI_STATUS_SUCCESS:
+            allocated_mem_percent['combined'] = 'N/A'
 
         # Top Row - per device data
         values['card%s' % (str(device))] = [device, getNodeId(device),
@@ -2000,7 +2006,7 @@ def showAllConcise(deviceList):
                                             str(getGUID(device)),
                                             temp_val, powerVal,
                                             combined_partition_data,
-                                            sclk, mclk, fan, str(perf).lower(),
+                                            sclk, mclk, fan, perf,
                                             str(pwrCap),
                                             allocated_mem_percent['combined'],
                                             str(gpu_busy)]
@@ -2507,7 +2513,7 @@ def showMemUse(deviceList):
         printLog(device, 'GPU Memory Allocated (VRAM%)',
                  int(allocated_mem_percent['value']))
         ret = rocmsmi.rsmi_dev_memory_busy_percent_get(device, byref(memoryUse))
-        if rsmi_ret_ok(ret, device, '% memory use'):
+        if rsmi_ret_ok(ret, device, '% memory use', silent=True):
             printLog(device, 'GPU Memory Read/Write Activity (%)', memoryUse.value)
         util_counters = getCoarseGrainUtil(device, "Memory Activity")
         if util_counters != -1:
@@ -3789,7 +3795,7 @@ def showGPUMetrics(deviceList):
             },
             "xcp_stats.gfx_busy_acc": {
                 "value": gpu_metrics.xcp_stats,
-                "unit": percent_unit,
+                "unit": count,
             },
             "xcp_stats.gfx_below_host_limit_acc": {
                 "value": gpu_metrics.xcp_stats,
