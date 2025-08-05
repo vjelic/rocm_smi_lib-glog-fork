@@ -1,0 +1,1709 @@
+{
+  "version": "2.1.0",
+  "runs": [
+    {
+      "tool": {
+        "driver": {
+          "name": "Glog.AI",
+          "organization": "Glog.AI",
+          "fullName": "Glog, Making software more secure",
+          "version": "1.0.0",
+          "semanticVersion": "1.0.0",
+          "informationUri": "https://www.glog.ai",
+          "rules": [
+            {
+              "id": "glog-f311591b-a5a1-437e-899d-3d34c49bd674",
+              "help": {
+                "text": "",
+                "markdown": "## Description\n\nThe `strncpy` function is a C library function that is used to copy a specified number of characters from one string to another. However, it is considered unsafe because it does not guarantee that the destination string will be null-terminated if the source string is longer than the specified length. This can lead to buffer overflow vulnerabilities, which can be exploited to execute arbitrary code, alter the intended control flow, read sensitive information, or cause the program to crash.\n\n## Mitigation Advice\n\nTo mitigate this vulnerability, you should use safer string handling functions that guarantee null-termination of the destination string and prevent buffer overflows. In C++, you can use the `std::string` class and its methods for string manipulation, which are safer and more convenient than C-style string handling functions.\n\n## Source Code Fix Recommendation\n\nReplace the `strncpy` function with the `std::string::copy` method:\n\n```cpp\n#include <string>\n\nstd::string message = \"Unknown event received\";\nmessage.copy(reinterpret_cast<char *>(&data_item->message), MAX_EVENT_NOTIFICATION_MSG_SIZE-1);\ndata_item->message[MAX_EVENT_NOTIFICATION_MSG_SIZE-1] = '\\0';\n```\n\n## Library Dependencies\n\nThe code example requires the following library dependencies:\n\n- `<string>`: This header file is required for using the `std::string` class and its methods.\n\n## References\n\n- [CWE-120: Buffer Copy without Checking Size of Input ('Classic Buffer Overflow')](https://cwe.mitre.org/data/definitions/120.html)\n\nPlease note that the links provided are accessible to anonymous users at the time of writing this report."
+              },
+              "properties": {
+                "tags": [
+                  "DS111237"
+                ]
+              }
+            },
+            {
+              "id": "glog-743b5b39-cb66-44ac-9ab3-c08b880354a8",
+              "help": {
+                "text": "",
+                "markdown": "## Description\n\nThe `strncpy` function in C++ is considered unsafe because it does not guarantee null-termination of the destination string when the source string length is greater than or equal to the destination buffer size. This can lead to buffer overflows, which can be exploited to execute arbitrary code, overwrite data, or cause a system crash.\n\n## Mitigation Advice\n\nTo mitigate this vulnerability, use safer string handling functions that ensure null-termination of the destination string. In C++, this can be achieved by using the `std::string` class or the `strlcpy` function if available.\n\n## Source Code Fix Recommendation\n\nReplace the `strncpy` function with `strlcpy` if available, or use `std::string`:\n\n```cpp\nstd::string message = final_message.str();\nif (message.size() > MAX_EVENT_NOTIFICATION_MSG_SIZE - 1) {\n    message.resize(MAX_EVENT_NOTIFICATION_MSG_SIZE - 1);\n}\nmemcpy(&data_item->message, message.c_str(), message.size() + 1);\n```\n\n## Library Dependencies\n\nThe code example requires the following library dependencies:\n\n- `<cstring>` for `memcpy`\n- `<string>` for `std::string`\n\n## References\n\n- [OWASP C++ Secure Coding Practices](https://cheatsheetseries.owasp.org/cheatsheets/C-Based_Toolchain_Hardening_Cheat_Sheet.html)\n- [CWE-119: Improper Restriction of Operations within the Bounds of a Memory Buffer](https://cwe.mitre.org/data/definitions/119.html)\n\nPlease note that the links provided are accessible to anonymous users at the time of writing this report."
+              },
+              "properties": {
+                "tags": [
+                  "DS111237"
+                ]
+              }
+            },
+            {
+              "id": "glog-3e2c31fb-5df8-4112-adb8-d8376ad57d6a",
+              "help": {
+                "text": "",
+                "markdown": "## Description\n\nThe `strncpy` function in C++ is considered unsafe because it does not guarantee null-termination of the destination string when the source string length is greater than or equal to the destination buffer size. This can lead to buffer overflows, which can be exploited to execute arbitrary code, overwrite data, or cause a system crash.\n\n## Mitigation Advice\n\nTo mitigate this vulnerability, use safer string handling functions that ensure null-termination of the destination string. In C++, this can be achieved by using the `std::string` class or the `strlcpy` function if available.\n\n## Source Code Fix Recommendation\n\nReplace the `strncpy` function with `strlcpy` if available, or use `std::string`:\n\n```cpp\nstd::string message = final_message.str();\nif (message.size() > MAX_EVENT_NOTIFICATION_MSG_SIZE - 1) {\n    message.resize(MAX_EVENT_NOTIFICATION_MSG_SIZE - 1);\n}\nmemcpy(&data_item->message, message.c_str(), message.size() + 1);\n```\n\n## Library Dependencies\n\nThe code example requires the following library dependencies:\n\n- `<cstring>` for `memcpy`\n- `<string>` for `std::string`\n\n## References\n\n- [OWASP C++ Secure Coding Practices](https://cheatsheetseries.owasp.org/cheatsheets/C-Based_Toolchain_Hardening_Cheat_Sheet.html)\n- [CWE-119: Improper Restriction of Operations within the Bounds of a Memory Buffer](https://cwe.mitre.org/data/definitions/119.html)\n\nPlease note that the links provided are accessible to anonymous users at the time of writing this report."
+              },
+              "properties": {
+                "tags": [
+                  "DS111237"
+                ]
+              }
+            },
+            {
+              "id": "glog-0d91ff44-7ddd-4d6e-8233-711160963b1c",
+              "help": {
+                "text": "",
+                "markdown": "## Description\n\nThe `strncpy` function in C++ is considered unsafe because it does not guarantee null-termination of the destination string when the source string length is greater than or equal to the destination buffer size. This can lead to buffer overflows, which can be exploited to execute arbitrary code, overwrite data, or cause a system crash.\n\n## Mitigation Advice\n\nTo mitigate this vulnerability, use safer string handling functions that ensure null-termination of the destination string. In C++, this can be achieved by using the `std::string` class or the `strlcpy` function if available.\n\n## Source Code Fix Recommendation\n\nReplace the `strncpy` function with `strlcpy` if available, or use `std::string`:\n\n```cpp\nstd::string message = final_message.str();\nif (message.size() > MAX_EVENT_NOTIFICATION_MSG_SIZE - 1) {\n    message.resize(MAX_EVENT_NOTIFICATION_MSG_SIZE - 1);\n}\nmemcpy(&data_item->message, message.c_str(), message.size() + 1);\n```\n\n## Library Dependencies\n\nThe code example requires the following library dependencies:\n\n- `<cstring>` for `memcpy`\n- `<string>` for `std::string`\n\n## References\n\n- [OWASP C++ Secure Coding Practices](https://cheatsheetseries.owasp.org/cheatsheets/C-Based_Toolchain_Hardening_Cheat_Sheet.html)\n- [CWE-119: Improper Restriction of Operations within the Bounds of a Memory Buffer](https://cwe.mitre.org/data/definitions/119.html)\n\nPlease note that the links provided are accessible to anonymous users at the time of writing this report."
+              },
+              "properties": {
+                "tags": [
+                  "DS111237"
+                ]
+              }
+            },
+            {
+              "id": "glog-08e1eaf6-997d-4413-9f2b-2f982b491336",
+              "help": {
+                "text": "",
+                "markdown": "## Description\n\nThe `strncpy` function in C++ is considered unsafe because it does not guarantee null-termination of the destination string when the source string length is greater than or equal to the destination buffer size. This can lead to buffer overflows, which can be exploited to execute arbitrary code, overwrite data, or cause a system crash.\n\n## Mitigation Advice\n\nTo mitigate this vulnerability, use safer string handling functions that ensure null-termination of the destination string. In C++, this can be achieved by using the `std::string` class or the `strlcpy` function if available.\n\n## Source Code Fix Recommendation\n\nReplace the `strncpy` function with `strlcpy` if available, or use `std::string`:\n\n```cpp\nstd::string message = final_message.str();\nif (message.size() > MAX_EVENT_NOTIFICATION_MSG_SIZE - 1) {\n    message.resize(MAX_EVENT_NOTIFICATION_MSG_SIZE - 1);\n}\nmemcpy(&data_item->message, message.c_str(), message.size() + 1);\n```\n\n## Library Dependencies\n\nThe code example requires the following library dependencies:\n\n- `<cstring>` for `memcpy`\n- `<string>` for `std::string`\n\n## References\n\n- [OWASP C++ Secure Coding Practices](https://cheatsheetseries.owasp.org/cheatsheets/C-Based_Toolchain_Hardening_Cheat_Sheet.html)\n- [CWE-119: Improper Restriction of Operations within the Bounds of a Memory Buffer](https://cwe.mitre.org/data/definitions/119.html)\n\nPlease note that the links provided are accessible to anonymous users at the time of writing this report."
+              },
+              "properties": {
+                "tags": [
+                  "DS111237"
+                ]
+              }
+            },
+            {
+              "id": "glog-fc4cd60c-c60d-48ea-a010-549aa514f350",
+              "help": {
+                "text": "",
+                "markdown": "## Description\n\nThe `strncpy` function in C++ is considered unsafe because it does not guarantee null-termination of the destination string when the source string length is greater than or equal to the destination buffer size. This can lead to buffer overflows, which can be exploited to execute arbitrary code, overwrite data, or cause a system crash.\n\n## Mitigation Advice\n\nTo mitigate this vulnerability, use safer string handling functions that ensure null-termination of the destination string. In C++, this can be achieved by using the `std::string` class or the `strlcpy` function if available.\n\n## Source Code Fix Recommendation\n\nReplace the `strncpy` function with `strlcpy` if available, or use `std::string`:\n\n```cpp\nstd::string message = final_message.str();\nif (message.size() > MAX_EVENT_NOTIFICATION_MSG_SIZE - 1) {\n    message.resize(MAX_EVENT_NOTIFICATION_MSG_SIZE - 1);\n}\nmemcpy(&data_item->message, message.c_str(), message.size() + 1);\n```\n\n## Library Dependencies\n\nThe code example requires the following library dependencies:\n\n- `<cstring>` for `memcpy`\n- `<string>` for `std::string`\n\n## References\n\n- [OWASP C++ Secure Coding Practices](https://cheatsheetseries.owasp.org/cheatsheets/C-Based_Toolchain_Hardening_Cheat_Sheet.html)\n- [CWE-119: Improper Restriction of Operations within the Bounds of a Memory Buffer](https://cwe.mitre.org/data/definitions/119.html)\n\nPlease note that the links provided are accessible to anonymous users at the time of writing this report."
+              },
+              "properties": {
+                "tags": [
+                  "DS111237"
+                ]
+              }
+            },
+            {
+              "id": "glog-edce871e-3e8d-41e5-aa95-bde64934dd6a",
+              "help": {
+                "text": "",
+                "markdown": "## Description\n\nThe `strncpy` function in C++ is considered unsafe because it does not guarantee null-termination of the destination string when the source string length is greater than or equal to the destination buffer size. This can lead to buffer overflows, which can be exploited to execute arbitrary code, overwrite data, or cause a system crash.\n\n## Mitigation Advice\n\nTo mitigate this vulnerability, use safer string handling functions that ensure null-termination of the destination string. In C++, this can be achieved by using the `std::string` class or the `strlcpy` function if available.\n\n## Source Code Fix Recommendation\n\nReplace the `strncpy` function with `strlcpy` if available, or use `std::string`:\n\n```cpp\nstd::string message = final_message.str();\nif (message.size() > MAX_EVENT_NOTIFICATION_MSG_SIZE - 1) {\n    message.resize(MAX_EVENT_NOTIFICATION_MSG_SIZE - 1);\n}\nmemcpy(&data_item->message, message.c_str(), message.size() + 1);\n```\n\n## Library Dependencies\n\nThe code example requires the following library dependencies:\n\n- `<cstring>` for `memcpy`\n- `<string>` for `std::string`\n\n## References\n\n- [OWASP C++ Secure Coding Practices](https://cheatsheetseries.owasp.org/cheatsheets/C-Based_Toolchain_Hardening_Cheat_Sheet.html)\n- [CWE-119: Improper Restriction of Operations within the Bounds of a Memory Buffer](https://cwe.mitre.org/data/definitions/119.html)\n\nPlease note that the links provided are accessible to anonymous users at the time of writing this report."
+              },
+              "properties": {
+                "tags": [
+                  "DS111237"
+                ]
+              }
+            },
+            {
+              "id": "glog-0e52f49f-2f56-47bf-83e3-bba79155f6e7",
+              "help": {
+                "text": "",
+                "markdown": "## Description\n\nThe `strncpy` function in C++ is considered unsafe because it does not guarantee null-termination of the destination string when the source string length is greater than or equal to the destination buffer size. This can lead to buffer overflows, which can be exploited to execute arbitrary code, overwrite data, or cause a system crash.\n\n## Mitigation Advice\n\nTo mitigate this vulnerability, use safer string handling functions that ensure null-termination of the destination string. In C++, this can be achieved by using the `std::string` class or the `strlcpy` function if available.\n\n## Source Code Fix Recommendation\n\nReplace the `strncpy` function with `strlcpy` if available, or use `std::string`:\n\n```cpp\nstd::string message = final_message.str();\nif (message.size() > MAX_EVENT_NOTIFICATION_MSG_SIZE - 1) {\n    message.resize(MAX_EVENT_NOTIFICATION_MSG_SIZE - 1);\n}\nmemcpy(&data_item->message, message.c_str(), message.size() + 1);\n```\n\n## Library Dependencies\n\nThe code example requires the following library dependencies:\n\n- `<cstring>` for `memcpy`\n- `<string>` for `std::string`\n\n## References\n\n- [OWASP C++ Secure Coding Practices](https://cheatsheetseries.owasp.org/cheatsheets/C-Based_Toolchain_Hardening_Cheat_Sheet.html)\n- [CWE-119: Improper Restriction of Operations within the Bounds of a Memory Buffer](https://cwe.mitre.org/data/definitions/119.html)\n\nPlease note that the links provided are accessible to anonymous users at the time of writing this report."
+              },
+              "properties": {
+                "tags": [
+                  "DS111237"
+                ]
+              }
+            },
+            {
+              "id": "glog-00450a0d-a69b-4667-ba68-0efea3484f17",
+              "help": {
+                "text": "",
+                "markdown": "## Description\n\nThe `strncpy` function in C++ is considered unsafe because it does not guarantee null-termination of the destination string when the source string length is greater than or equal to the destination buffer size. This can lead to buffer overflows, which can be exploited to execute arbitrary code, overwrite data, or cause a system crash.\n\n## Mitigation Advice\n\nTo mitigate this vulnerability, use safer string handling functions that ensure null-termination of the destination string. In C++, this can be achieved by using the `std::string` class or the `strlcpy` function if available.\n\n## Source Code Fix Recommendation\n\nReplace the `strncpy` function with `strlcpy` if available, or use `std::string`:\n\n```cpp\nstd::string message = final_message.str();\nif (message.size() > MAX_EVENT_NOTIFICATION_MSG_SIZE - 1) {\n    message.resize(MAX_EVENT_NOTIFICATION_MSG_SIZE - 1);\n}\nmemcpy(&data_item->message, message.c_str(), message.size() + 1);\n```\n\n## Library Dependencies\n\nThe code example requires the following library dependencies:\n\n- `<cstring>` for `memcpy`\n- `<string>` for `std::string`\n\n## References\n\n- [OWASP C++ Secure Coding Practices](https://cheatsheetseries.owasp.org/cheatsheets/C-Based_Toolchain_Hardening_Cheat_Sheet.html)\n- [CWE-119: Improper Restriction of Operations within the Bounds of a Memory Buffer](https://cwe.mitre.org/data/definitions/119.html)\n\nPlease note that the links provided are accessible to anonymous users at the time of writing this report."
+              },
+              "properties": {
+                "tags": [
+                  "DS111237"
+                ]
+              }
+            },
+            {
+              "id": "glog-057e1bdb-09ec-4ab0-a568-924e919e79b0",
+              "help": {
+                "text": "",
+                "markdown": "## Description\n\nThe `strncpy` function in C++ is considered unsafe because it does not guarantee null-termination of the destination string when the source string length is greater than or equal to the destination buffer size. This can lead to buffer overflows, which can be exploited to execute arbitrary code, overwrite data, or cause a system crash.\n\n## Mitigation Advice\n\nTo mitigate this vulnerability, use safer string handling functions that ensure null-termination of the destination string. In C++, this can be achieved by using the `std::string` class or the `strlcpy` function if available.\n\n## Source Code Fix Recommendation\n\nReplace the `strncpy` function with `strlcpy` if available, or use `std::string`:\n\n```cpp\nstd::string message = final_message.str();\nif (message.size() > MAX_EVENT_NOTIFICATION_MSG_SIZE - 1) {\n    message.resize(MAX_EVENT_NOTIFICATION_MSG_SIZE - 1);\n}\nmemcpy(&data_item->message, message.c_str(), message.size() + 1);\n```\n\n## Library Dependencies\n\nThe code example requires the following library dependencies:\n\n- `<cstring>` for `memcpy`\n- `<string>` for `std::string`\n\n## References\n\n- [OWASP C++ Secure Coding Practices](https://cheatsheetseries.owasp.org/cheatsheets/C-Based_Toolchain_Hardening_Cheat_Sheet.html)\n- [CWE-119: Improper Restriction of Operations within the Bounds of a Memory Buffer](https://cwe.mitre.org/data/definitions/119.html)\n\nPlease note that the links provided are accessible to anonymous users at the time of writing this report."
+              },
+              "properties": {
+                "tags": [
+                  "DS111237"
+                ]
+              }
+            },
+            {
+              "id": "glog-9c286f02-1d88-4cb9-b500-941f7b015beb",
+              "help": {
+                "text": "",
+                "markdown": "## Description\n\nThe `strncpy` function in C++ is considered unsafe because it does not guarantee null-termination of the destination string when the source string length is greater than or equal to the destination buffer size. This can lead to buffer overflows, which can be exploited to execute arbitrary code, overwrite data, or cause a system crash.\n\n## Mitigation Advice\n\nTo mitigate this vulnerability, use safer string handling functions that ensure null-termination of the destination string. In C++, this can be achieved by using the `std::string` class or the `strlcpy` function if available.\n\n## Source Code Fix Recommendation\n\nReplace the `strncpy` function with `strlcpy` if available, or use `std::string`:\n\n```cpp\nstd::string message = final_message.str();\nif (message.size() > MAX_EVENT_NOTIFICATION_MSG_SIZE - 1) {\n    message.resize(MAX_EVENT_NOTIFICATION_MSG_SIZE - 1);\n}\nmemcpy(&data_item->message, message.c_str(), message.size() + 1);\n```\n\n## Library Dependencies\n\nThe code example requires the following library dependencies:\n\n- `<cstring>` for `memcpy`\n- `<string>` for `std::string`\n\n## References\n\n- [OWASP C++ Secure Coding Practices](https://cheatsheetseries.owasp.org/cheatsheets/C-Based_Toolchain_Hardening_Cheat_Sheet.html)\n- [CWE-119: Improper Restriction of Operations within the Bounds of a Memory Buffer](https://cwe.mitre.org/data/definitions/119.html)\n\nPlease note that the links provided are accessible to anonymous users at the time of writing this report."
+              },
+              "properties": {
+                "tags": [
+                  "DS111237"
+                ]
+              }
+            },
+            {
+              "id": "glog-3f48b029-0666-4d1d-a1ba-439e8fa16494",
+              "help": {
+                "text": "",
+                "markdown": "## Description\n\nThe `strncpy` function in C++ is considered unsafe because it does not guarantee null-termination of the destination string when the source string length is greater than or equal to the destination buffer size. This can lead to buffer overflows, which can be exploited to execute arbitrary code, overwrite data, or cause a system crash.\n\n## Mitigation Advice\n\nTo mitigate this vulnerability, use safer string handling functions that ensure null-termination of the destination string. In C++, this can be achieved by using the `std::string` class or the `strlcpy` function if available.\n\n## Source Code Fix Recommendation\n\nReplace the `strncpy` function with `strlcpy` if available, or use `std::string`:\n\n```cpp\nstd::string message = final_message.str();\nif (message.size() > MAX_EVENT_NOTIFICATION_MSG_SIZE - 1) {\n    message.resize(MAX_EVENT_NOTIFICATION_MSG_SIZE - 1);\n}\nmemcpy(&data_item->message, message.c_str(), message.size() + 1);\n```\n\n## Library Dependencies\n\nThe code example requires the following library dependencies:\n\n- `<cstring>` for `memcpy`\n- `<string>` for `std::string`\n\n## References\n\n- [OWASP C++ Secure Coding Practices](https://cheatsheetseries.owasp.org/cheatsheets/C-Based_Toolchain_Hardening_Cheat_Sheet.html)\n- [CWE-119: Improper Restriction of Operations within the Bounds of a Memory Buffer](https://cwe.mitre.org/data/definitions/119.html)\n\nPlease note that the links provided are accessible to anonymous users at the time of writing this report."
+              },
+              "properties": {
+                "tags": [
+                  "DS111237"
+                ]
+              }
+            },
+            {
+              "id": "glog-f9a79473-76c5-49e2-929e-11a3ad81590c",
+              "help": {
+                "text": "",
+                "markdown": "## Description\n\nThe `strncpy` function in C++ is considered unsafe because it does not guarantee that the destination string will be null-terminated if the source string's length is greater than or equal to the number of characters specified by the third argument. This can lead to buffer overflow vulnerabilities, which can be exploited to execute arbitrary code, cause a denial of service, or gain unauthorized access to a system.\n\n## Mitigation Advice\n\nTo mitigate this vulnerability, consider using safer string handling functions that ensure null-termination of the destination string, such as `strlcpy` or `strncpy_s`. If these functions are not available, you can manually null-terminate the destination string after using `strncpy`.\n\n## Source Code Fix Recommendation\n\nHere's how you can fix the code:\n\n```cpp\nstrncpy(reinterpret_cast<char *>(&data_item->message), \"Event type None received\", MAX_EVENT_NOTIFICATION_MSG_SIZE-1);\ndata_item->message[MAX_EVENT_NOTIFICATION_MSG_SIZE-1] = '\\0';\n```\n\nIn this fix, we manually null-terminate the destination string after using `strncpy`.\n\n## Library Dependencies\n\nThe code example requires the following library:\n\n```cpp\n#include <cstring>\n```\n\n## References\n\n- [OWASP C++ Secure Coding Practices](https://cheatsheetseries.owasp.org/cheatsheets/C-Based_Toolchain_Hardening_Cheat_Sheet.html)\n- [CWE-120: Buffer Copy without Checking Size of Input ('Classic Buffer Overflow')](https://cwe.mitre.org/data/definitions/120.html)\n\nPlease note that the links provided are accessible to anonymous users at the time of writing this report."
+              },
+              "properties": {
+                "tags": [
+                  "DS111237"
+                ]
+              }
+            },
+            {
+              "id": "glog-45ac7cde-db3e-4e67-8dc4-ded163e6e59d",
+              "help": {
+                "text": "",
+                "markdown": "## Description\n\nThe `memcpy` function in C++ is used to copy a block of memory from one location to another. This function does not check for the size of the destination buffer, which can lead to buffer overflow if the source is larger than the destination. This is a common vulnerability in C++ programming and can lead to serious security issues such as code execution, denial of service, or information disclosure.\n\n## Mitigation Advice\n\nTo mitigate this vulnerability, it is recommended to always ensure that the destination buffer is large enough to hold the data being copied. This can be done by checking the size of the source and destination before calling `memcpy`. Alternatively, use functions that do check the size of the destination buffer, such as `strncpy` or `memcpy_s`.\n\n## Source Code Fix Recommendation\n\nReplace the `memcpy` function with `memcpy_s`, which includes a size parameter for the destination buffer. This will prevent buffer overflow by ensuring that the destination buffer is large enough to hold the source data.\n\n```cpp\nmemcpy_s(&header_value, sizeof(metrics_table_header_t), &tmp_header_info, sizeof(metrics_table_header_t));\n```\n\n## Library Dependencies\n\nThe `memcpy` function is part of the C Standard Library, so no additional libraries are required for this code to execute properly.\n\n## References\n\n- [Common Weakness Enumeration (CWE-119)](https://cwe.mitre.org/data/definitions/119.html)\n\nPlease note that the links provided are active and accessible to anonymous users at the time of writing this report."
+              },
+              "properties": {
+                "tags": [
+                  "DS121708"
+                ]
+              }
+            },
+            {
+              "id": "glog-b7a92261-3a1b-46b1-b88e-b808bc91312c",
+              "help": {
+                "text": "",
+                "markdown": "## Description\n\nThe `strlen(buf)` function in C++ is used to calculate the length of a string. However, it can lead to vulnerabilities if not used properly. The function counts the number of characters in a string up to but not including the null-terminating character. If the string is not null-terminated, `strlen()` will continue reading memory until it encounters a null byte, potentially leading to buffer overflows, memory corruption, and other undefined behavior.\n\n## Mitigation Advice\n\nTo mitigate this issue, always ensure that your strings are null-terminated. Avoid using `strlen()` on strings that may not be null-terminated. Instead, consider using safer alternatives such as `strnlen()`, which takes a maximum length parameter and will not read past this length, even if it does not encounter a null byte.\n\n## Source Code Fix Recommendation\n\nInstead of:\n\n```cpp\n#include <cstring>\n\nchar buf[100];\n// ... populate buf ...\nsize_t len = strlen(buf);\n```\n\nUse:\n\n```cpp\n#include <cstring>\n\nchar buf[100];\n// ... populate buf ...\nsize_t max_len = sizeof(buf);\nsize_t len = strnlen(buf, max_len);\n```\n\n## Library Dependencies\n\nThe code example requires the `<cstring>` library.\n\n## References\n\n- [OWASP C++ Secure Coding Practices](https://cheatsheetseries.owasp.org/cheatsheets/C-Based_Toolchain_Hardening_Cheat_Sheet.html)"
+              },
+              "properties": {
+                "tags": [
+                  "DS140021"
+                ]
+              }
+            },
+            {
+              "id": "glog-831cc25d-ba96-4da1-8d27-3f48a779c1e7",
+              "help": {
+                "text": "",
+                "markdown": "## Description\n\nThe `strncpy` function in C++ is considered unsafe because it does not guarantee null-termination of the destination string when the source string length is greater than or equal to the destination buffer size. This can lead to buffer overflows, which can be exploited to execute arbitrary code, overwrite data, or cause a system crash.\n\n## Mitigation Advice\n\nTo mitigate this vulnerability, consider using safer string handling functions that ensure null-termination of the destination string. In C++, this could be `std::string` or `strlcpy` (though `strlcpy` is not standard). Always ensure that the destination buffer is large enough to hold the source string and the null-terminator.\n\n## Source Code Fix Recommendation\n\nReplace the `strncpy` function with a safer alternative. Here's an example using `std::string`:\n\n```cpp\n#include <string>\n\nstd::string board_name = buf;\nif (board_name.size() > 11) {\n    board_name = board_name.substr(0, 11);\n}\ndev->board_name = board_name.c_str();\n```\n\n## Library Dependencies\n\nThe code example requires the following library:\n\n- `<string>`\n\n## References\n\n- [OWASP C++ Secure Coding Practices](https://cheatsheetseries.owasp.org/cheatsheets/C-Based_Toolchain_Hardening_Cheat_Sheet.html)\n- [CWE-119: Improper Restriction of Operations within the Bounds of a Memory Buffer](https://cwe.mitre.org/data/definitions/119.html)\n\nPlease note that the links provided are accessible to anonymous users at the time of writing this report."
+              },
+              "properties": {
+                "tags": [
+                  "DS111237"
+                ]
+              }
+            },
+            {
+              "id": "glog-1d9b8613-c3dc-4b4b-80f2-a7d5a2159053",
+              "help": {
+                "text": "",
+                "markdown": "## Description\n\nThe `strncpy` function in C++ is a common source of vulnerabilities due to its potential to cause buffer overflows. This function copies a specified number of characters from one string to another. If the source string is longer than the specified number of characters, `strncpy` does not append a null character to the destination string. This can lead to buffer overflow vulnerabilities if the destination string is used as a null-terminated string.\n\n## Mitigation Advice\n\nTo mitigate this vulnerability, consider using safer string handling functions that ensure null-termination and prevent buffer overflows. For example, `strlcpy` or `snprintf` can be used instead of `strncpy`. \n\n## Source Code Fix Recommendation\n\nReplace the `strncpy` function with `strlcpy` or `snprintf`:\n\n```cpp\nstrlcpy(dev->sku_name, &buf[4], sizeof(dev->sku_name));\n```\n\nor\n\n```cpp\nsnprintf(dev->sku_name, sizeof(dev->sku_name), \"%s\", &buf[4]);\n```\n\n## Library Dependencies\n\nThe code example requires the following library dependencies:\n\n- `cstring` or `string.h` for `strncpy`, `strlcpy`, or `snprintf`\n\n## References\n\n- [OWASP C++ Secure Coding Practices](https://cheatsheetseries.owasp.org/cheatsheets/C-Based_Toolchain_Hardening_Cheat_Sheet.html)\n- [CWE-120: Buffer Copy without Checking Size of Input ('Classic Buffer Overflow')](https://cwe.mitre.org/data/definitions/120.html)\n\nPlease note that the links provided are accessible to anonymous users at the time of writing this report."
+              },
+              "properties": {
+                "tags": [
+                  "DS111237"
+                ]
+              }
+            }
+          ],
+          "language": "en-US",
+          "contents": [
+            "localizedData",
+            "nonLocalizedData"
+          ],
+          "isComprehensive": false
+        }
+      },
+      "language": "en-US",
+      "results": [
+        {
+          "ruleId": "glog-f311591b-a5a1-437e-899d-3d34c49bd674",
+          "kind": "fail",
+          "level": "error",
+          "message": {
+            "text": "Detected Use of Prohibited C Function (strncpy)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/rocm_smi.cc"
+                },
+                "region": {
+                  "startLine": 6436,
+                  "startColumn": 12,
+                  "endLine": 6436,
+                  "endColumn": 127,
+                  "charOffset": 196941,
+                  "charLength": 115,
+                  "snippet": {
+                    "text": "strncpy(reinterpret_cast<char *>(&data_item->message), \"Unknown event received\", MAX_EVENT_NOTIFICATION_MSG_SIZE-1)",
+                    "rendered": {
+                      "text": "strncpy(reinterpret_cast<char *>(&data_item->message), \"Unknown event received\", MAX_EVENT_NOTIFICATION_MSG_SIZE-1)",
+                      "markdown": "`strncpy(reinterpret_cast<char *>(&data_item->message), \"Unknown event received\", MAX_EVENT_NOTIFICATION_MSG_SIZE-1)`"
+                    }
+                  },
+                  "sourceLanguage": "cpp"
+                }
+              }
+            }
+          ],
+          "fixes": [
+            {
+              "description": {
+                "text": "strncpy is dangerous, as if the source contains 'n' or more characters, it will not null terminate the destination."
+              },
+              "artifactChanges": [
+                {
+                  "artifactLocation": {
+                    "uri": "src/rocm_smi.cc"
+                  },
+                  "replacements": [
+                    {
+                      "deletedRegion": {
+                        "charOffset": 196941,
+                        "charLength": 115
+                      },
+                      "insertedContent": {
+                        "text": "strcpy_s(reinterpret_cast<char *>(&data_item->message),  MAX_EVENT_NOTIFICATION_MSG_SIZE-1,  \"Unknown event received\")"
+                      }
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "description": {
+                "text": "strncpy is dangerous, as if the source contains 'n' or more characters, it will not null terminate the destination."
+              },
+              "artifactChanges": [
+                {
+                  "artifactLocation": {
+                    "uri": "src/rocm_smi.cc"
+                  },
+                  "replacements": [
+                    {
+                      "deletedRegion": {
+                        "charOffset": 196941,
+                        "charLength": 115
+                      },
+                      "insertedContent": {
+                        "text": "strlcpy(reinterpret_cast<char *>(&data_item->message),  \"Unknown event received\",  MAX_EVENT_NOTIFICATION_MSG_SIZE-1)"
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "properties": {
+            "DevSkimSeverity": "Important",
+            "DevSkimConfidence": "High",
+            "tags": [
+              "API.DangerousAPI.BannedFunction"
+            ]
+          }
+        },
+        {
+          "ruleId": "glog-743b5b39-cb66-44ac-9ab3-c08b880354a8",
+          "kind": "fail",
+          "level": "error",
+          "message": {
+            "text": "Detected Use of Prohibited C Function (strncpy)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/rocm_smi.cc"
+                },
+                "region": {
+                  "startLine": 6394,
+                  "startColumn": 12,
+                  "endLine": 6394,
+                  "endColumn": 130,
+                  "charOffset": 195050,
+                  "charLength": 118,
+                  "snippet": {
+                    "text": "strncpy(reinterpret_cast<char *>(&data_item->message), final_message.str().c_str(), MAX_EVENT_NOTIFICATION_MSG_SIZE-1)",
+                    "rendered": {
+                      "text": "strncpy(reinterpret_cast<char *>(&data_item->message), final_message.str().c_str(), MAX_EVENT_NOTIFICATION_MSG_SIZE-1)",
+                      "markdown": "`strncpy(reinterpret_cast<char *>(&data_item->message), final_message.str().c_str(), MAX_EVENT_NOTIFICATION_MSG_SIZE-1)`"
+                    }
+                  },
+                  "sourceLanguage": "cpp"
+                }
+              }
+            }
+          ],
+          "fixes": [
+            {
+              "description": {
+                "text": "strncpy is dangerous, as if the source contains 'n' or more characters, it will not null terminate the destination."
+              },
+              "artifactChanges": [
+                {
+                  "artifactLocation": {
+                    "uri": "src/rocm_smi.cc"
+                  },
+                  "replacements": [
+                    {
+                      "deletedRegion": {
+                        "charOffset": 195050,
+                        "charLength": 118
+                      },
+                      "insertedContent": {
+                        "text": "strcpy_s(reinterpret_cast<char *>(&data_item->message),  MAX_EVENT_NOTIFICATION_MSG_SIZE-1,  final_message.str().c_str())"
+                      }
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "description": {
+                "text": "strncpy is dangerous, as if the source contains 'n' or more characters, it will not null terminate the destination."
+              },
+              "artifactChanges": [
+                {
+                  "artifactLocation": {
+                    "uri": "src/rocm_smi.cc"
+                  },
+                  "replacements": [
+                    {
+                      "deletedRegion": {
+                        "charOffset": 195050,
+                        "charLength": 118
+                      },
+                      "insertedContent": {
+                        "text": "strlcpy(reinterpret_cast<char *>(&data_item->message),  final_message.str().c_str(),  MAX_EVENT_NOTIFICATION_MSG_SIZE-1)"
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "properties": {
+            "DevSkimSeverity": "Important",
+            "DevSkimConfidence": "High",
+            "tags": [
+              "API.DangerousAPI.BannedFunction"
+            ]
+          }
+        },
+        {
+          "ruleId": "glog-3e2c31fb-5df8-4112-adb8-d8376ad57d6a",
+          "kind": "fail",
+          "level": "error",
+          "message": {
+            "text": "Detected Use of Prohibited C Function (strncpy)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/rocm_smi.cc"
+                },
+                "region": {
+                  "startLine": 6411,
+                  "startColumn": 12,
+                  "endLine": 6411,
+                  "endColumn": 130,
+                  "charOffset": 195782,
+                  "charLength": 118,
+                  "snippet": {
+                    "text": "strncpy(reinterpret_cast<char *>(&data_item->message), final_message.str().c_str(), MAX_EVENT_NOTIFICATION_MSG_SIZE-1)",
+                    "rendered": {
+                      "text": "strncpy(reinterpret_cast<char *>(&data_item->message), final_message.str().c_str(), MAX_EVENT_NOTIFICATION_MSG_SIZE-1)",
+                      "markdown": "`strncpy(reinterpret_cast<char *>(&data_item->message), final_message.str().c_str(), MAX_EVENT_NOTIFICATION_MSG_SIZE-1)`"
+                    }
+                  },
+                  "sourceLanguage": "cpp"
+                }
+              }
+            }
+          ],
+          "fixes": [
+            {
+              "description": {
+                "text": "strncpy is dangerous, as if the source contains 'n' or more characters, it will not null terminate the destination."
+              },
+              "artifactChanges": [
+                {
+                  "artifactLocation": {
+                    "uri": "src/rocm_smi.cc"
+                  },
+                  "replacements": [
+                    {
+                      "deletedRegion": {
+                        "charOffset": 195782,
+                        "charLength": 118
+                      },
+                      "insertedContent": {
+                        "text": "strcpy_s(reinterpret_cast<char *>(&data_item->message),  MAX_EVENT_NOTIFICATION_MSG_SIZE-1,  final_message.str().c_str())"
+                      }
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "description": {
+                "text": "strncpy is dangerous, as if the source contains 'n' or more characters, it will not null terminate the destination."
+              },
+              "artifactChanges": [
+                {
+                  "artifactLocation": {
+                    "uri": "src/rocm_smi.cc"
+                  },
+                  "replacements": [
+                    {
+                      "deletedRegion": {
+                        "charOffset": 195782,
+                        "charLength": 118
+                      },
+                      "insertedContent": {
+                        "text": "strlcpy(reinterpret_cast<char *>(&data_item->message),  final_message.str().c_str(),  MAX_EVENT_NOTIFICATION_MSG_SIZE-1)"
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "properties": {
+            "DevSkimSeverity": "Important",
+            "DevSkimConfidence": "High",
+            "tags": [
+              "API.DangerousAPI.BannedFunction"
+            ]
+          }
+        },
+        {
+          "ruleId": "glog-0d91ff44-7ddd-4d6e-8233-711160963b1c",
+          "kind": "fail",
+          "level": "error",
+          "message": {
+            "text": "Detected Use of Prohibited C Function (strncpy)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/rocm_smi.cc"
+                },
+                "region": {
+                  "startLine": 6432,
+                  "startColumn": 12,
+                  "endLine": 6432,
+                  "endColumn": 130,
+                  "charOffset": 196761,
+                  "charLength": 118,
+                  "snippet": {
+                    "text": "strncpy(reinterpret_cast<char *>(&data_item->message), final_message.str().c_str(), MAX_EVENT_NOTIFICATION_MSG_SIZE-1)",
+                    "rendered": {
+                      "text": "strncpy(reinterpret_cast<char *>(&data_item->message), final_message.str().c_str(), MAX_EVENT_NOTIFICATION_MSG_SIZE-1)",
+                      "markdown": "`strncpy(reinterpret_cast<char *>(&data_item->message), final_message.str().c_str(), MAX_EVENT_NOTIFICATION_MSG_SIZE-1)`"
+                    }
+                  },
+                  "sourceLanguage": "cpp"
+                }
+              }
+            }
+          ],
+          "fixes": [
+            {
+              "description": {
+                "text": "strncpy is dangerous, as if the source contains 'n' or more characters, it will not null terminate the destination."
+              },
+              "artifactChanges": [
+                {
+                  "artifactLocation": {
+                    "uri": "src/rocm_smi.cc"
+                  },
+                  "replacements": [
+                    {
+                      "deletedRegion": {
+                        "charOffset": 196761,
+                        "charLength": 118
+                      },
+                      "insertedContent": {
+                        "text": "strcpy_s(reinterpret_cast<char *>(&data_item->message),  MAX_EVENT_NOTIFICATION_MSG_SIZE-1,  final_message.str().c_str())"
+                      }
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "description": {
+                "text": "strncpy is dangerous, as if the source contains 'n' or more characters, it will not null terminate the destination."
+              },
+              "artifactChanges": [
+                {
+                  "artifactLocation": {
+                    "uri": "src/rocm_smi.cc"
+                  },
+                  "replacements": [
+                    {
+                      "deletedRegion": {
+                        "charOffset": 196761,
+                        "charLength": 118
+                      },
+                      "insertedContent": {
+                        "text": "strlcpy(reinterpret_cast<char *>(&data_item->message),  final_message.str().c_str(),  MAX_EVENT_NOTIFICATION_MSG_SIZE-1)"
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "properties": {
+            "DevSkimSeverity": "Important",
+            "DevSkimConfidence": "High",
+            "tags": [
+              "API.DangerousAPI.BannedFunction"
+            ]
+          }
+        },
+        {
+          "ruleId": "glog-08e1eaf6-997d-4413-9f2b-2f982b491336",
+          "kind": "fail",
+          "level": "error",
+          "message": {
+            "text": "Detected Use of Prohibited C Function (strncpy)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/rocm_smi.cc"
+                },
+                "region": {
+                  "startLine": 6377,
+                  "startColumn": 12,
+                  "endLine": 6377,
+                  "endColumn": 130,
+                  "charOffset": 194288,
+                  "charLength": 118,
+                  "snippet": {
+                    "text": "strncpy(reinterpret_cast<char *>(&data_item->message), final_message.str().c_str(), MAX_EVENT_NOTIFICATION_MSG_SIZE-1)",
+                    "rendered": {
+                      "text": "strncpy(reinterpret_cast<char *>(&data_item->message), final_message.str().c_str(), MAX_EVENT_NOTIFICATION_MSG_SIZE-1)",
+                      "markdown": "`strncpy(reinterpret_cast<char *>(&data_item->message), final_message.str().c_str(), MAX_EVENT_NOTIFICATION_MSG_SIZE-1)`"
+                    }
+                  },
+                  "sourceLanguage": "cpp"
+                }
+              }
+            }
+          ],
+          "fixes": [
+            {
+              "description": {
+                "text": "strncpy is dangerous, as if the source contains 'n' or more characters, it will not null terminate the destination."
+              },
+              "artifactChanges": [
+                {
+                  "artifactLocation": {
+                    "uri": "src/rocm_smi.cc"
+                  },
+                  "replacements": [
+                    {
+                      "deletedRegion": {
+                        "charOffset": 194288,
+                        "charLength": 118
+                      },
+                      "insertedContent": {
+                        "text": "strcpy_s(reinterpret_cast<char *>(&data_item->message),  MAX_EVENT_NOTIFICATION_MSG_SIZE-1,  final_message.str().c_str())"
+                      }
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "description": {
+                "text": "strncpy is dangerous, as if the source contains 'n' or more characters, it will not null terminate the destination."
+              },
+              "artifactChanges": [
+                {
+                  "artifactLocation": {
+                    "uri": "src/rocm_smi.cc"
+                  },
+                  "replacements": [
+                    {
+                      "deletedRegion": {
+                        "charOffset": 194288,
+                        "charLength": 118
+                      },
+                      "insertedContent": {
+                        "text": "strlcpy(reinterpret_cast<char *>(&data_item->message),  final_message.str().c_str(),  MAX_EVENT_NOTIFICATION_MSG_SIZE-1)"
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "properties": {
+            "DevSkimSeverity": "Important",
+            "DevSkimConfidence": "High",
+            "tags": [
+              "API.DangerousAPI.BannedFunction"
+            ]
+          }
+        },
+        {
+          "ruleId": "glog-fc4cd60c-c60d-48ea-a010-549aa514f350",
+          "kind": "fail",
+          "level": "error",
+          "message": {
+            "text": "Detected Use of Prohibited C Function (strncpy)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/rocm_smi.cc"
+                },
+                "region": {
+                  "startLine": 6358,
+                  "startColumn": 12,
+                  "endLine": 6358,
+                  "endColumn": 130,
+                  "charOffset": 193432,
+                  "charLength": 118,
+                  "snippet": {
+                    "text": "strncpy(reinterpret_cast<char *>(&data_item->message), final_message.str().c_str(), MAX_EVENT_NOTIFICATION_MSG_SIZE-1)",
+                    "rendered": {
+                      "text": "strncpy(reinterpret_cast<char *>(&data_item->message), final_message.str().c_str(), MAX_EVENT_NOTIFICATION_MSG_SIZE-1)",
+                      "markdown": "`strncpy(reinterpret_cast<char *>(&data_item->message), final_message.str().c_str(), MAX_EVENT_NOTIFICATION_MSG_SIZE-1)`"
+                    }
+                  },
+                  "sourceLanguage": "cpp"
+                }
+              }
+            }
+          ],
+          "fixes": [
+            {
+              "description": {
+                "text": "strncpy is dangerous, as if the source contains 'n' or more characters, it will not null terminate the destination."
+              },
+              "artifactChanges": [
+                {
+                  "artifactLocation": {
+                    "uri": "src/rocm_smi.cc"
+                  },
+                  "replacements": [
+                    {
+                      "deletedRegion": {
+                        "charOffset": 193432,
+                        "charLength": 118
+                      },
+                      "insertedContent": {
+                        "text": "strcpy_s(reinterpret_cast<char *>(&data_item->message),  MAX_EVENT_NOTIFICATION_MSG_SIZE-1,  final_message.str().c_str())"
+                      }
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "description": {
+                "text": "strncpy is dangerous, as if the source contains 'n' or more characters, it will not null terminate the destination."
+              },
+              "artifactChanges": [
+                {
+                  "artifactLocation": {
+                    "uri": "src/rocm_smi.cc"
+                  },
+                  "replacements": [
+                    {
+                      "deletedRegion": {
+                        "charOffset": 193432,
+                        "charLength": 118
+                      },
+                      "insertedContent": {
+                        "text": "strlcpy(reinterpret_cast<char *>(&data_item->message),  final_message.str().c_str(),  MAX_EVENT_NOTIFICATION_MSG_SIZE-1)"
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "properties": {
+            "DevSkimSeverity": "Important",
+            "DevSkimConfidence": "High",
+            "tags": [
+              "API.DangerousAPI.BannedFunction"
+            ]
+          }
+        },
+        {
+          "ruleId": "glog-edce871e-3e8d-41e5-aa95-bde64934dd6a",
+          "kind": "fail",
+          "level": "error",
+          "message": {
+            "text": "Detected Use of Prohibited C Function (strncpy)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/rocm_smi.cc"
+                },
+                "region": {
+                  "startLine": 6339,
+                  "startColumn": 12,
+                  "endLine": 6339,
+                  "endColumn": 130,
+                  "charOffset": 192622,
+                  "charLength": 118,
+                  "snippet": {
+                    "text": "strncpy(reinterpret_cast<char *>(&data_item->message), final_message.str().c_str(), MAX_EVENT_NOTIFICATION_MSG_SIZE-1)",
+                    "rendered": {
+                      "text": "strncpy(reinterpret_cast<char *>(&data_item->message), final_message.str().c_str(), MAX_EVENT_NOTIFICATION_MSG_SIZE-1)",
+                      "markdown": "`strncpy(reinterpret_cast<char *>(&data_item->message), final_message.str().c_str(), MAX_EVENT_NOTIFICATION_MSG_SIZE-1)`"
+                    }
+                  },
+                  "sourceLanguage": "cpp"
+                }
+              }
+            }
+          ],
+          "fixes": [
+            {
+              "description": {
+                "text": "strncpy is dangerous, as if the source contains 'n' or more characters, it will not null terminate the destination."
+              },
+              "artifactChanges": [
+                {
+                  "artifactLocation": {
+                    "uri": "src/rocm_smi.cc"
+                  },
+                  "replacements": [
+                    {
+                      "deletedRegion": {
+                        "charOffset": 192622,
+                        "charLength": 118
+                      },
+                      "insertedContent": {
+                        "text": "strcpy_s(reinterpret_cast<char *>(&data_item->message),  MAX_EVENT_NOTIFICATION_MSG_SIZE-1,  final_message.str().c_str())"
+                      }
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "description": {
+                "text": "strncpy is dangerous, as if the source contains 'n' or more characters, it will not null terminate the destination."
+              },
+              "artifactChanges": [
+                {
+                  "artifactLocation": {
+                    "uri": "src/rocm_smi.cc"
+                  },
+                  "replacements": [
+                    {
+                      "deletedRegion": {
+                        "charOffset": 192622,
+                        "charLength": 118
+                      },
+                      "insertedContent": {
+                        "text": "strlcpy(reinterpret_cast<char *>(&data_item->message),  final_message.str().c_str(),  MAX_EVENT_NOTIFICATION_MSG_SIZE-1)"
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "properties": {
+            "DevSkimSeverity": "Important",
+            "DevSkimConfidence": "High",
+            "tags": [
+              "API.DangerousAPI.BannedFunction"
+            ]
+          }
+        },
+        {
+          "ruleId": "glog-0e52f49f-2f56-47bf-83e3-bba79155f6e7",
+          "kind": "fail",
+          "level": "error",
+          "message": {
+            "text": "Detected Use of Prohibited C Function (strncpy)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/rocm_smi.cc"
+                },
+                "region": {
+                  "startLine": 6314,
+                  "startColumn": 12,
+                  "endLine": 6314,
+                  "endColumn": 130,
+                  "charOffset": 191406,
+                  "charLength": 118,
+                  "snippet": {
+                    "text": "strncpy(reinterpret_cast<char *>(&data_item->message), final_message.str().c_str(), MAX_EVENT_NOTIFICATION_MSG_SIZE-1)",
+                    "rendered": {
+                      "text": "strncpy(reinterpret_cast<char *>(&data_item->message), final_message.str().c_str(), MAX_EVENT_NOTIFICATION_MSG_SIZE-1)",
+                      "markdown": "`strncpy(reinterpret_cast<char *>(&data_item->message), final_message.str().c_str(), MAX_EVENT_NOTIFICATION_MSG_SIZE-1)`"
+                    }
+                  },
+                  "sourceLanguage": "cpp"
+                }
+              }
+            }
+          ],
+          "fixes": [
+            {
+              "description": {
+                "text": "strncpy is dangerous, as if the source contains 'n' or more characters, it will not null terminate the destination."
+              },
+              "artifactChanges": [
+                {
+                  "artifactLocation": {
+                    "uri": "src/rocm_smi.cc"
+                  },
+                  "replacements": [
+                    {
+                      "deletedRegion": {
+                        "charOffset": 191406,
+                        "charLength": 118
+                      },
+                      "insertedContent": {
+                        "text": "strcpy_s(reinterpret_cast<char *>(&data_item->message),  MAX_EVENT_NOTIFICATION_MSG_SIZE-1,  final_message.str().c_str())"
+                      }
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "description": {
+                "text": "strncpy is dangerous, as if the source contains 'n' or more characters, it will not null terminate the destination."
+              },
+              "artifactChanges": [
+                {
+                  "artifactLocation": {
+                    "uri": "src/rocm_smi.cc"
+                  },
+                  "replacements": [
+                    {
+                      "deletedRegion": {
+                        "charOffset": 191406,
+                        "charLength": 118
+                      },
+                      "insertedContent": {
+                        "text": "strlcpy(reinterpret_cast<char *>(&data_item->message),  final_message.str().c_str(),  MAX_EVENT_NOTIFICATION_MSG_SIZE-1)"
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "properties": {
+            "DevSkimSeverity": "Important",
+            "DevSkimConfidence": "High",
+            "tags": [
+              "API.DangerousAPI.BannedFunction"
+            ]
+          }
+        },
+        {
+          "ruleId": "glog-00450a0d-a69b-4667-ba68-0efea3484f17",
+          "kind": "fail",
+          "level": "error",
+          "message": {
+            "text": "Detected Use of Prohibited C Function (strncpy)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/rocm_smi.cc"
+                },
+                "region": {
+                  "startLine": 6287,
+                  "startColumn": 12,
+                  "endLine": 6287,
+                  "endColumn": 130,
+                  "charOffset": 190056,
+                  "charLength": 118,
+                  "snippet": {
+                    "text": "strncpy(reinterpret_cast<char *>(&data_item->message), final_message.str().c_str(), MAX_EVENT_NOTIFICATION_MSG_SIZE-1)",
+                    "rendered": {
+                      "text": "strncpy(reinterpret_cast<char *>(&data_item->message), final_message.str().c_str(), MAX_EVENT_NOTIFICATION_MSG_SIZE-1)",
+                      "markdown": "`strncpy(reinterpret_cast<char *>(&data_item->message), final_message.str().c_str(), MAX_EVENT_NOTIFICATION_MSG_SIZE-1)`"
+                    }
+                  },
+                  "sourceLanguage": "cpp"
+                }
+              }
+            }
+          ],
+          "fixes": [
+            {
+              "description": {
+                "text": "strncpy is dangerous, as if the source contains 'n' or more characters, it will not null terminate the destination."
+              },
+              "artifactChanges": [
+                {
+                  "artifactLocation": {
+                    "uri": "src/rocm_smi.cc"
+                  },
+                  "replacements": [
+                    {
+                      "deletedRegion": {
+                        "charOffset": 190056,
+                        "charLength": 118
+                      },
+                      "insertedContent": {
+                        "text": "strcpy_s(reinterpret_cast<char *>(&data_item->message),  MAX_EVENT_NOTIFICATION_MSG_SIZE-1,  final_message.str().c_str())"
+                      }
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "description": {
+                "text": "strncpy is dangerous, as if the source contains 'n' or more characters, it will not null terminate the destination."
+              },
+              "artifactChanges": [
+                {
+                  "artifactLocation": {
+                    "uri": "src/rocm_smi.cc"
+                  },
+                  "replacements": [
+                    {
+                      "deletedRegion": {
+                        "charOffset": 190056,
+                        "charLength": 118
+                      },
+                      "insertedContent": {
+                        "text": "strlcpy(reinterpret_cast<char *>(&data_item->message),  final_message.str().c_str(),  MAX_EVENT_NOTIFICATION_MSG_SIZE-1)"
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "properties": {
+            "DevSkimSeverity": "Important",
+            "DevSkimConfidence": "High",
+            "tags": [
+              "API.DangerousAPI.BannedFunction"
+            ]
+          }
+        },
+        {
+          "ruleId": "glog-057e1bdb-09ec-4ab0-a568-924e919e79b0",
+          "kind": "fail",
+          "level": "error",
+          "message": {
+            "text": "Detected Use of Prohibited C Function (strncpy)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/rocm_smi.cc"
+                },
+                "region": {
+                  "startLine": 6275,
+                  "startColumn": 12,
+                  "endLine": 6275,
+                  "endColumn": 130,
+                  "charOffset": 189537,
+                  "charLength": 118,
+                  "snippet": {
+                    "text": "strncpy(reinterpret_cast<char *>(&data_item->message), final_message.str().c_str(), MAX_EVENT_NOTIFICATION_MSG_SIZE-1)",
+                    "rendered": {
+                      "text": "strncpy(reinterpret_cast<char *>(&data_item->message), final_message.str().c_str(), MAX_EVENT_NOTIFICATION_MSG_SIZE-1)",
+                      "markdown": "`strncpy(reinterpret_cast<char *>(&data_item->message), final_message.str().c_str(), MAX_EVENT_NOTIFICATION_MSG_SIZE-1)`"
+                    }
+                  },
+                  "sourceLanguage": "cpp"
+                }
+              }
+            }
+          ],
+          "fixes": [
+            {
+              "description": {
+                "text": "strncpy is dangerous, as if the source contains 'n' or more characters, it will not null terminate the destination."
+              },
+              "artifactChanges": [
+                {
+                  "artifactLocation": {
+                    "uri": "src/rocm_smi.cc"
+                  },
+                  "replacements": [
+                    {
+                      "deletedRegion": {
+                        "charOffset": 189537,
+                        "charLength": 118
+                      },
+                      "insertedContent": {
+                        "text": "strcpy_s(reinterpret_cast<char *>(&data_item->message),  MAX_EVENT_NOTIFICATION_MSG_SIZE-1,  final_message.str().c_str())"
+                      }
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "description": {
+                "text": "strncpy is dangerous, as if the source contains 'n' or more characters, it will not null terminate the destination."
+              },
+              "artifactChanges": [
+                {
+                  "artifactLocation": {
+                    "uri": "src/rocm_smi.cc"
+                  },
+                  "replacements": [
+                    {
+                      "deletedRegion": {
+                        "charOffset": 189537,
+                        "charLength": 118
+                      },
+                      "insertedContent": {
+                        "text": "strlcpy(reinterpret_cast<char *>(&data_item->message),  final_message.str().c_str(),  MAX_EVENT_NOTIFICATION_MSG_SIZE-1)"
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "properties": {
+            "DevSkimSeverity": "Important",
+            "DevSkimConfidence": "High",
+            "tags": [
+              "API.DangerousAPI.BannedFunction"
+            ]
+          }
+        },
+        {
+          "ruleId": "glog-9c286f02-1d88-4cb9-b500-941f7b015beb",
+          "kind": "fail",
+          "level": "error",
+          "message": {
+            "text": "Detected Use of Prohibited C Function (strncpy)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/rocm_smi.cc"
+                },
+                "region": {
+                  "startLine": 6261,
+                  "startColumn": 12,
+                  "endLine": 6261,
+                  "endColumn": 130,
+                  "charOffset": 188869,
+                  "charLength": 118,
+                  "snippet": {
+                    "text": "strncpy(reinterpret_cast<char *>(&data_item->message), final_message.str().c_str(), MAX_EVENT_NOTIFICATION_MSG_SIZE-1)",
+                    "rendered": {
+                      "text": "strncpy(reinterpret_cast<char *>(&data_item->message), final_message.str().c_str(), MAX_EVENT_NOTIFICATION_MSG_SIZE-1)",
+                      "markdown": "`strncpy(reinterpret_cast<char *>(&data_item->message), final_message.str().c_str(), MAX_EVENT_NOTIFICATION_MSG_SIZE-1)`"
+                    }
+                  },
+                  "sourceLanguage": "cpp"
+                }
+              }
+            }
+          ],
+          "fixes": [
+            {
+              "description": {
+                "text": "strncpy is dangerous, as if the source contains 'n' or more characters, it will not null terminate the destination."
+              },
+              "artifactChanges": [
+                {
+                  "artifactLocation": {
+                    "uri": "src/rocm_smi.cc"
+                  },
+                  "replacements": [
+                    {
+                      "deletedRegion": {
+                        "charOffset": 188869,
+                        "charLength": 118
+                      },
+                      "insertedContent": {
+                        "text": "strcpy_s(reinterpret_cast<char *>(&data_item->message),  MAX_EVENT_NOTIFICATION_MSG_SIZE-1,  final_message.str().c_str())"
+                      }
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "description": {
+                "text": "strncpy is dangerous, as if the source contains 'n' or more characters, it will not null terminate the destination."
+              },
+              "artifactChanges": [
+                {
+                  "artifactLocation": {
+                    "uri": "src/rocm_smi.cc"
+                  },
+                  "replacements": [
+                    {
+                      "deletedRegion": {
+                        "charOffset": 188869,
+                        "charLength": 118
+                      },
+                      "insertedContent": {
+                        "text": "strlcpy(reinterpret_cast<char *>(&data_item->message),  final_message.str().c_str(),  MAX_EVENT_NOTIFICATION_MSG_SIZE-1)"
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "properties": {
+            "DevSkimSeverity": "Important",
+            "DevSkimConfidence": "High",
+            "tags": [
+              "API.DangerousAPI.BannedFunction"
+            ]
+          }
+        },
+        {
+          "ruleId": "glog-3f48b029-0666-4d1d-a1ba-439e8fa16494",
+          "kind": "fail",
+          "level": "error",
+          "message": {
+            "text": "Detected Use of Prohibited C Function (strncpy)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/rocm_smi.cc"
+                },
+                "region": {
+                  "startLine": 6248,
+                  "startColumn": 12,
+                  "endLine": 6248,
+                  "endColumn": 130,
+                  "charOffset": 188328,
+                  "charLength": 118,
+                  "snippet": {
+                    "text": "strncpy(reinterpret_cast<char *>(&data_item->message), final_message.str().c_str(), MAX_EVENT_NOTIFICATION_MSG_SIZE-1)",
+                    "rendered": {
+                      "text": "strncpy(reinterpret_cast<char *>(&data_item->message), final_message.str().c_str(), MAX_EVENT_NOTIFICATION_MSG_SIZE-1)",
+                      "markdown": "`strncpy(reinterpret_cast<char *>(&data_item->message), final_message.str().c_str(), MAX_EVENT_NOTIFICATION_MSG_SIZE-1)`"
+                    }
+                  },
+                  "sourceLanguage": "cpp"
+                }
+              }
+            }
+          ],
+          "fixes": [
+            {
+              "description": {
+                "text": "strncpy is dangerous, as if the source contains 'n' or more characters, it will not null terminate the destination."
+              },
+              "artifactChanges": [
+                {
+                  "artifactLocation": {
+                    "uri": "src/rocm_smi.cc"
+                  },
+                  "replacements": [
+                    {
+                      "deletedRegion": {
+                        "charOffset": 188328,
+                        "charLength": 118
+                      },
+                      "insertedContent": {
+                        "text": "strcpy_s(reinterpret_cast<char *>(&data_item->message),  MAX_EVENT_NOTIFICATION_MSG_SIZE-1,  final_message.str().c_str())"
+                      }
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "description": {
+                "text": "strncpy is dangerous, as if the source contains 'n' or more characters, it will not null terminate the destination."
+              },
+              "artifactChanges": [
+                {
+                  "artifactLocation": {
+                    "uri": "src/rocm_smi.cc"
+                  },
+                  "replacements": [
+                    {
+                      "deletedRegion": {
+                        "charOffset": 188328,
+                        "charLength": 118
+                      },
+                      "insertedContent": {
+                        "text": "strlcpy(reinterpret_cast<char *>(&data_item->message),  final_message.str().c_str(),  MAX_EVENT_NOTIFICATION_MSG_SIZE-1)"
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "properties": {
+            "DevSkimSeverity": "Important",
+            "DevSkimConfidence": "High",
+            "tags": [
+              "API.DangerousAPI.BannedFunction"
+            ]
+          }
+        },
+        {
+          "ruleId": "glog-f9a79473-76c5-49e2-929e-11a3ad81590c",
+          "kind": "fail",
+          "level": "error",
+          "message": {
+            "text": "Detected Use of Prohibited C Function (strncpy)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/rocm_smi.cc"
+                },
+                "region": {
+                  "startLine": 6235,
+                  "startColumn": 12,
+                  "endLine": 6235,
+                  "endColumn": 129,
+                  "charOffset": 187739,
+                  "charLength": 117,
+                  "snippet": {
+                    "text": "strncpy(reinterpret_cast<char *>(&data_item->message), \"Event type None received\", MAX_EVENT_NOTIFICATION_MSG_SIZE-1)",
+                    "rendered": {
+                      "text": "strncpy(reinterpret_cast<char *>(&data_item->message), \"Event type None received\", MAX_EVENT_NOTIFICATION_MSG_SIZE-1)",
+                      "markdown": "`strncpy(reinterpret_cast<char *>(&data_item->message), \"Event type None received\", MAX_EVENT_NOTIFICATION_MSG_SIZE-1)`"
+                    }
+                  },
+                  "sourceLanguage": "cpp"
+                }
+              }
+            }
+          ],
+          "fixes": [
+            {
+              "description": {
+                "text": "strncpy is dangerous, as if the source contains 'n' or more characters, it will not null terminate the destination."
+              },
+              "artifactChanges": [
+                {
+                  "artifactLocation": {
+                    "uri": "src/rocm_smi.cc"
+                  },
+                  "replacements": [
+                    {
+                      "deletedRegion": {
+                        "charOffset": 187739,
+                        "charLength": 117
+                      },
+                      "insertedContent": {
+                        "text": "strcpy_s(reinterpret_cast<char *>(&data_item->message),  MAX_EVENT_NOTIFICATION_MSG_SIZE-1,  \"Event type None received\")"
+                      }
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "description": {
+                "text": "strncpy is dangerous, as if the source contains 'n' or more characters, it will not null terminate the destination."
+              },
+              "artifactChanges": [
+                {
+                  "artifactLocation": {
+                    "uri": "src/rocm_smi.cc"
+                  },
+                  "replacements": [
+                    {
+                      "deletedRegion": {
+                        "charOffset": 187739,
+                        "charLength": 117
+                      },
+                      "insertedContent": {
+                        "text": "strlcpy(reinterpret_cast<char *>(&data_item->message),  \"Event type None received\",  MAX_EVENT_NOTIFICATION_MSG_SIZE-1)"
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "properties": {
+            "DevSkimSeverity": "Important",
+            "DevSkimConfidence": "High",
+            "tags": [
+              "API.DangerousAPI.BannedFunction"
+            ]
+          }
+        },
+        {
+          "ruleId": "glog-45ac7cde-db3e-4e67-8dc4-ded163e6e59d",
+          "kind": "fail",
+          "level": "note",
+          "message": {
+            "text": "Detected Vulnerability in C Function (memcpy)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/rocm_smi_gpu_metrics.cc"
+                },
+                "region": {
+                  "startLine": 4482,
+                  "startColumn": 9,
+                  "endLine": 4482,
+                  "endColumn": 79,
+                  "charOffset": 216326,
+                  "charLength": 70,
+                  "snippet": {
+                    "text": "memcpy(&header_value, &tmp_header_info, sizeof(metrics_table_header_t)",
+                    "rendered": {
+                      "text": "memcpy(&header_value, &tmp_header_info, sizeof(metrics_table_header_t)",
+                      "markdown": "`memcpy(&header_value, &tmp_header_info, sizeof(metrics_table_header_t)`"
+                    }
+                  },
+                  "sourceLanguage": "cpp"
+                }
+              }
+            }
+          ],
+          "fixes": [
+            {
+              "description": {
+                "text": "There are a number of conditions in which memcpy can introduce a vulnerability (mismatched buffer sizes, null pointers, etc.). More secure alternitives perform additional validation of the source and destination buffer"
+              },
+              "artifactChanges": [
+                {
+                  "artifactLocation": {
+                    "uri": "src/rocm_smi_gpu_metrics.cc"
+                  },
+                  "replacements": [
+                    {
+                      "deletedRegion": {
+                        "charOffset": 216326,
+                        "charLength": 70
+                      },
+                      "insertedContent": {
+                        "text": "memcpy_s(&header_value, <size of &header_value>,  &tmp_header_info,  sizeof(metrics_table_header_t)"
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "properties": {
+            "DevSkimSeverity": "BestPractice",
+            "DevSkimConfidence": "High",
+            "tags": [
+              "API.DangerousAPI.ProblematicFunction"
+            ]
+          }
+        },
+        {
+          "ruleId": "glog-b7a92261-3a1b-46b1-b88e-b808bc91312c",
+          "kind": "fail",
+          "level": "note",
+          "message": {
+            "text": "Issue Detected with C Function (strlen)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "oam/src/amd_oam.cc"
+                },
+                "region": {
+                  "startLine": 168,
+                  "startColumn": 13,
+                  "endLine": 168,
+                  "endColumn": 24,
+                  "charOffset": 5323,
+                  "charLength": 11,
+                  "snippet": {
+                    "text": "strlen(buf)",
+                    "rendered": {
+                      "text": "strlen(buf)",
+                      "markdown": "`strlen(buf)`"
+                    }
+                  },
+                  "sourceLanguage": "cpp"
+                }
+              }
+            }
+          ],
+          "fixes": [
+            {
+              "description": {
+                "text": "If a string is missing a null terminator, strlen will read past the end of the buffer"
+              },
+              "artifactChanges": [
+                {
+                  "artifactLocation": {
+                    "uri": "oam/src/amd_oam.cc"
+                  },
+                  "replacements": [
+                    {
+                      "deletedRegion": {
+                        "charOffset": 5323,
+                        "charLength": 11
+                      },
+                      "insertedContent": {
+                        "text": "strlen_s(buf, <size of buf>)"
+                      }
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "description": {
+                "text": "If a string is missing a null terminator, strlen will read past the end of the buffer"
+              },
+              "artifactChanges": [
+                {
+                  "artifactLocation": {
+                    "uri": "oam/src/amd_oam.cc"
+                  },
+                  "replacements": [
+                    {
+                      "deletedRegion": {
+                        "charOffset": 5323,
+                        "charLength": 11
+                      },
+                      "insertedContent": {
+                        "text": "strnlen(buf, <size of buf>)"
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "properties": {
+            "DevSkimSeverity": "BestPractice",
+            "DevSkimConfidence": "High",
+            "tags": [
+              "API.DangerousAPI.ProblematicFunction"
+            ]
+          }
+        },
+        {
+          "ruleId": "glog-831cc25d-ba96-4da1-8d27-3f48a779c1e7",
+          "kind": "fail",
+          "level": "error",
+          "message": {
+            "text": "\"Detected Use of Prohibited C Function (strncpy)\""
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "oam/src/amd_oam.cc"
+                },
+                "region": {
+                  "startLine": 172,
+                  "startColumn": 11,
+                  "endLine": 172,
+                  "endColumn": 44,
+                  "charOffset": 5483,
+                  "charLength": 33,
+                  "snippet": {
+                    "text": "strncpy(dev->board_name, buf, 12)",
+                    "rendered": {
+                      "text": "strncpy(dev->board_name, buf, 12)",
+                      "markdown": "`strncpy(dev->board_name, buf, 12)`"
+                    }
+                  },
+                  "sourceLanguage": "cpp"
+                }
+              }
+            }
+          ],
+          "fixes": [
+            {
+              "description": {
+                "text": "strncpy is dangerous, as if the source contains 'n' or more characters, it will not null terminate the destination."
+              },
+              "artifactChanges": [
+                {
+                  "artifactLocation": {
+                    "uri": "oam/src/amd_oam.cc"
+                  },
+                  "replacements": [
+                    {
+                      "deletedRegion": {
+                        "charOffset": 5483,
+                        "charLength": 33
+                      },
+                      "insertedContent": {
+                        "text": "strcpy_s(dev->board_name,  12,  buf)"
+                      }
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "description": {
+                "text": "strncpy is dangerous, as if the source contains 'n' or more characters, it will not null terminate the destination."
+              },
+              "artifactChanges": [
+                {
+                  "artifactLocation": {
+                    "uri": "oam/src/amd_oam.cc"
+                  },
+                  "replacements": [
+                    {
+                      "deletedRegion": {
+                        "charOffset": 5483,
+                        "charLength": 33
+                      },
+                      "insertedContent": {
+                        "text": "strlcpy(dev->board_name,  buf,  12)"
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "properties": {
+            "DevSkimSeverity": "Important",
+            "DevSkimConfidence": "High",
+            "tags": [
+              "API.DangerousAPI.BannedFunction"
+            ]
+          }
+        },
+        {
+          "ruleId": "glog-1d9b8613-c3dc-4b4b-80f2-a7d5a2159053",
+          "kind": "fail",
+          "level": "error",
+          "message": {
+            "text": "\"Detected Use of Prohibited C Function (strncpy)\""
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "oam/src/amd_oam.cc"
+                },
+                "region": {
+                  "startLine": 171,
+                  "startColumn": 11,
+                  "endLine": 171,
+                  "endColumn": 45,
+                  "charOffset": 5436,
+                  "charLength": 34,
+                  "snippet": {
+                    "text": "strncpy(dev->sku_name, &buf[4], 6)",
+                    "rendered": {
+                      "text": "strncpy(dev->sku_name, &buf[4], 6)",
+                      "markdown": "`strncpy(dev->sku_name, &buf[4], 6)`"
+                    }
+                  },
+                  "sourceLanguage": "cpp"
+                }
+              }
+            }
+          ],
+          "fixes": [
+            {
+              "description": {
+                "text": "strncpy is dangerous, as if the source contains 'n' or more characters, it will not null terminate the destination."
+              },
+              "artifactChanges": [
+                {
+                  "artifactLocation": {
+                    "uri": "oam/src/amd_oam.cc"
+                  },
+                  "replacements": [
+                    {
+                      "deletedRegion": {
+                        "charOffset": 5436,
+                        "charLength": 34
+                      },
+                      "insertedContent": {
+                        "text": "strcpy_s(dev->sku_name,  6,  &buf[4])"
+                      }
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "description": {
+                "text": "strncpy is dangerous, as if the source contains 'n' or more characters, it will not null terminate the destination."
+              },
+              "artifactChanges": [
+                {
+                  "artifactLocation": {
+                    "uri": "oam/src/amd_oam.cc"
+                  },
+                  "replacements": [
+                    {
+                      "deletedRegion": {
+                        "charOffset": 5436,
+                        "charLength": 34
+                      },
+                      "insertedContent": {
+                        "text": "strlcpy(dev->sku_name,  &buf[4],  6)"
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "properties": {
+            "DevSkimSeverity": "Important",
+            "DevSkimConfidence": "High",
+            "tags": [
+              "API.DangerousAPI.BannedFunction"
+            ]
+          }
+        }
+      ],
+      "newlineSequences": [
+        "\r\n",
+        "\n"
+      ]
+    }
+  ]
+}
